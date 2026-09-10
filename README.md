@@ -29,5 +29,14 @@ python $HOME/combine-vtu-sherlock/combine-vtu.py . \
     --output results-combined.vtu
 ```
 
+For large datasets, use low-memory streaming mode. It retains only one
+velocity array at a time, but produces a slower and larger ASCII VTU file:
+
+```bash
+python $HOME/combine-vtu-sherlock/combine-vtu.py . \
+    --output results-combined.vtu \
+    --stream
+```
+
 All input files must contain a point-data array named exactly `Velocity` and
 must have the same mesh geometry and point ordering.
