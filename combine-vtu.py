@@ -198,7 +198,11 @@ if __name__ == "__main__":
         print(f"Input directory does not exist: {directory}", file=sys.stderr)
         sys.exit(1)
 
-    sorted_files = sorted(directory.glob("*.vtu"), key=lambda p: p.name)
+    output_path = args.output.resolve()
+    sorted_files = sorted(
+        (path for path in directory.glob("*.vtu") if path.resolve() != output_path),
+        key=lambda p: p.name,
+    )
     if not sorted_files:
         print(f"No VTU files found in {directory}")
         sys.exit(1)

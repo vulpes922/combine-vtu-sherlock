@@ -38,5 +38,24 @@ python $HOME/combine-vtu-sherlock/combine-vtu.py . \
     --stream
 ```
 
+## Run as a Sherlock Slurm job
+
+After cloning and completing the setup above, submit the included job script:
+
+```bash
+cd $HOME/combine-vtu-sherlock
+sbatch combine_vtu.slurm $SCRATCH/P01/96-procs
+```
+
+This writes `results-combined.vtu` into the input directory and creates
+`combine-vtu-JOBID.out` and `.err` log files in the submission directory.
+To choose a different output path:
+
+```bash
+sbatch combine_vtu.slurm \
+    $SCRATCH/P01/96-procs \
+    $SCRATCH/P01/96-procs/results-combined.vtu
+```
+
 All input files must contain a point-data array named exactly `Velocity` and
 must have the same mesh geometry and point ordering.
